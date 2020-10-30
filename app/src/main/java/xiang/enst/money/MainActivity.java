@@ -9,15 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
     private final static int sendUser = 1;
@@ -37,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 如果请求码为 sendUser 返回码 为 RESULT_OK RESULT_OK为系统自定义的int值为 -1
         if (requestCode == sendUser && resultCode == RESULT_OK) {
             String value = data.getStringExtra("rates");
             et_rates.setText(value);
@@ -58,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     public void rate(View view)
     {
         Intent intent=new Intent(MainActivity.this,MainActivity2.class);
-        // 启动意图(意图，请求码(int)) 请求码最好使用 final static定义 方便识别
         startActivityForResult(intent, sendUser);
     }
 
