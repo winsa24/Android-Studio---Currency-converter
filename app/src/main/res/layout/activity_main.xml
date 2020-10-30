@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/euros_label"
+                android:text="Amount"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -31,7 +31,7 @@
             <EditText
                 android:id="@+id/edit_euro"
                 android:inputType="numberDecimal"
-                android:hint="@string/euros_label"
+                android:hint="Amount"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -102,7 +102,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="rate"
+                android:text="@string/rate_label"
                 android:onClick="rate"/>
 
         </LinearLayout>

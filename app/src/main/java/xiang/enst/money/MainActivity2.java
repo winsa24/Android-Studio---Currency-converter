@@ -28,7 +28,7 @@ public class MainActivity2 extends AppCompatActivity {
     private MyTask mTask;
     private Intent intent;
     private JSONObject rates;
-
+    private int from = 0, to = 0;
 
     private class MyTask extends AsyncTask<URL, String, JSONObject> {
 
@@ -69,25 +69,87 @@ public class MainActivity2 extends AppCompatActivity {
 
         // Check which radio button was clicked
         switch(view.getId()) {
+            case R.id.radio_c_euros:
+                if (checked)
+                    Log.d("onclick", "radio_c_euros");
+                from = 1;
+                break;
+            case R.id.radio_c_pounds:
+                if (checked)
+                    Log.d("onclick", "radio_c_pounds");
+                from = 2;
+                break;
+            case R.id.radio_c_dollars:
+                if (checked)
+                    Log.d("onclick", "radio_c_dollars");
+                from = 3;
+                break;
             case R.id.radio_t_euros:
                 if (checked)
-                    // Pirates are the best
+                    Log.d("onclick", "radio_t_euros");
+                    to = 1;
                     break;
             case R.id.radio_t_pounds:
                 if (checked)
-                    // Pirates are the best
+                    Log.d("onclick", "radio_t_pounds");
+                    to = 2;
                     break;
             case R.id.radio_t_dollars:
                 if (checked)
-                    // Ninjas rule
+                    Log.d("onclick", "radio_t_dollars");
+                    to = 3;
                     break;
         }
+
     }
 
     public void convert(View view) throws JSONException {
 
         intent = getIntent();
-        double r = rates.getJSONObject("rates").getDouble("GBP");
+        double r = 0;
+
+        if(from == 1){
+            double dte = rates.getJSONObject("rates").getDouble("EUR");
+            switch (to){
+                case 1:
+                    r = rates.getJSONObject("rates").getDouble("EUR") * (1/dte);
+                    break;
+                case 2:
+                    r = rates.getJSONObject("rates").getDouble("GBP") * (1/dte);
+                    break;
+                case 3:
+                    r = rates.getJSONObject("rates").getDouble("USD") * (1/dte);
+                    break;
+            }
+        }
+        if(from == 2){
+            double dte = rates.getJSONObject("rates").getDouble("GBP");
+            switch (to){
+                case 1:
+                    r = rates.getJSONObject("rates").getDouble("EUR") * (1/dte);
+                    break;
+                case 2:
+                    r = rates.getJSONObject("rates").getDouble("GBP") * (1/dte);
+                    break;
+                case 3:
+                    r = rates.getJSONObject("rates").getDouble("USD") * (1/dte);
+                    break;
+            }
+        }
+        if(from == 3){
+            switch (to){
+                case 1:
+                    r = rates.getJSONObject("rates").getDouble("EUR");
+                    break;
+                case 2:
+                    r = rates.getJSONObject("rates").getDouble("GBP");
+                    break;
+                case 3:
+                    r = rates.getJSONObject("rates").getDouble("USD");
+                    break;
+            }
+        }
+
 
         intent.putExtra("rates", Double.toString(r));
         Log.d("r:", Double.toString(r));
